@@ -25,6 +25,8 @@ def load_data():
 
 data = load_data()
 
+st.write("Debug: Data loaded successfully")
+
 st.write("### Displaying Data")
 st.write(data.head())
 
