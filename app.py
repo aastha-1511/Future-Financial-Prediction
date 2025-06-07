@@ -17,7 +17,7 @@ st.title("US Market Trends - Predictive Analysis")
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("us_market_data_hourly_with_inflation_modified_updated.zip")
+    data = pd.read_csv("us_market_data_hourly_with_inflation_modified.zip")
     data.columns = data.columns.str.strip()
     if "observation_date" in data.columns:
         data["observation_date"] = pd.to_datetime(data["observation_date"], format="%d-%m-%Y %H:%M", errors='coerce')
