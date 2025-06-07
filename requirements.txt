@@ -1,0 +1,14 @@
+streamlit==1.45.1
+pandas==1.5.3
+numpy==1.24.3
+seaborn==0.12.2
+matplotlib==3.7.1
+scikit-learn==1.2.2
+tensorflow==2.12.0
+xgboost==1.7.6
+
+If you are using Virtual Environment, you can activate it by:
+#myenv\Scripts\activate
+run the following command to install the required packages:
+# If you are using pip, run the following command:
+# pip install -r requirements.txt
