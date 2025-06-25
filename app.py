@@ -21,6 +21,7 @@ def load_data():
     data.columns = data.columns.str.strip()
     if "observation_date" in data.columns:
         data["observation_date"] = pd.to_datetime(data["observation_date"], format="%d-%m-%Y %H:%M", errors='coerce')
+        data = data.dropna(subset=["observation_date"])
     return data
 
 data = load_data()
