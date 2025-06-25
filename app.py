@@ -19,9 +19,26 @@ st.title("US Market Trends - Predictive Analysis")
 def load_data():
     data = pd.read_csv("us_market_data_hourly_with_inflation_modified.zip")
     data.columns = data.columns.str.strip()
+    
+    # Ensure datetime parsing with type enforcement
     if "observation_date" in data.columns:
         data["observation_date"] = pd.to_datetime(data["observation_date"], format="%d-%m-%Y %H:%M", errors='coerce')
-        data = data.dropna(subset=["observation_date"])
+        data = data.dropna(subset=["observation_date"])  # Drop rows with invalid datetime
+        data["observation_date"] = pd.to_datetime(data["observation_date"])  # Enforce type
+    
+    # Debug: print dtypes
+    st.write("🛠️ Debug: Data types after loading and cleaning")
+    st.write(data.dtypes)
+
+    # Fix other problematic object columns
+    for col in data.select_dtypes(include="object").columns:
+        try:
+            data[col] = pd.to_datetime(data[col], errors="raise")
+            st.write(f"✅ Auto-converted column {col} to datetime")
+        except Exception:
+            data[col] = data[col].astype(str)
+            st.write(f"ℹ️ Converted column {col} to string")
+
     return data
 
 data = load_data()
