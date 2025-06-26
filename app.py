@@ -19,12 +19,8 @@ st.title("US Market Trends - Predictive Analysis")
 def load_data():
     data = pd.read_csv("us_market_data_hourly_with_inflation_modified.zip")
     data.columns = data.columns.str.strip()
-    
-    # Ensure datetime parsing with type enforcement
     if "observation_date" in data.columns:
         data["observation_date"] = pd.to_datetime(data["observation_date"], format="%d-%m-%Y %H:%M", errors='coerce')
-        data = data.dropna(subset=["observation_date"])  
-        data['observation_date'] = data['observation_date'].astype('datetime64[ns]')
     return data
 
 data = load_data()
@@ -32,7 +28,7 @@ data = load_data()
 st.write("Debug: Data loaded successfully")
 
 st.write("### Displaying Data")
-st.write(data.head())
+st.dataframe(data.head())
 
 st.write("### Data Overview")
 st.write(data.dtypes)  # Check column types
