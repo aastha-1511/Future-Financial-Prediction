@@ -25,13 +25,19 @@ def load_data():
 
 data = load_data()
 
-st.write("Debug: Data loaded successfully")
+st.write("Data loaded successfully")
 
 st.write("### Displaying Data")
 st.dataframe(data.head())
 
 st.write("### Data Overview")
-st.write(data.dtypes)  # Check column types
+dtypes_df = pd.DataFrame({
+    "Parameter": data.dtypes.index,
+    "Data Type": data.dtypes.values
+})
+
+st.write("#### Table: Parameters and Their Data Types")
+st.table(dtypes_df)
 
 # Correlation Heatmap
 st.title("US Market Data Correlation Heatmap")
