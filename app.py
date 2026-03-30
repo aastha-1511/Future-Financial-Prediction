@@ -24,6 +24,7 @@ def load_data():
     return data
 
 data = load_data()
+data = data.copy()
 
 st.write("Data loaded successfully")
 
@@ -42,7 +43,13 @@ st.table(dtypes_df)
 # Correlation Heatmap
 st.title("US Market Data Correlation Heatmap")
 st.sidebar.header("Heatmap Settings")
-columns = st.sidebar.multiselect("Select Columns for Correlation", options=data.columns.drop("observation_date"), default=data.columns.drop("observation_date"))
+cols = data.columns.drop("observation_date").tolist()
+
+columns = st.sidebar.multiselect(
+    "Select Columns for Correlation",
+    options=cols,
+    default=cols
+)
 
 if len(columns) > 1:
     correlation_matrix = data[columns].corr()
